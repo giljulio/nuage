@@ -301,11 +301,11 @@ gulp.task('copy-assets', function () {
     }));
 });
 
-var deploy = require('gulp-gh-pages');
-gulp.task('deploy', function () {
-  return gulp.src("./dist/**/*")
-    .pipe(deploy())
-});
+const {src, task}= require('gulp');
+const ghPages = require('gulp-gh-pages');
+
+task('deploy', () => src('./dist/**/*').pipe(ghPages()));
+
 
 gulp.task('deps', async (done) => {
   await paths.copyDependencies.forEach(function (filesObj) {
