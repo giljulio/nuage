@@ -300,6 +300,10 @@ gulp.task('copy-assets', function () {
       stream: true
     }));
 });
+gulp.task('copy-config', function () {
+  return gulp.src('CNAME')
+    .pipe(gulp.dest('./dist/'));
+});
 
 const {src, task}= require('gulp');
 const ghPages = require('gulp-gh-pages');
@@ -383,6 +387,6 @@ gulp.task('watch', function (done) {
 
 });
 
-gulp.task('default', gulp.series('clean:dist', 'copy-assets', gulp.series('html', 'sass', 'sass-min', 'bootstrapjs', 'mrarejs'), gulp.series('serve', 'watch')));
+gulp.task('default', gulp.series('clean:dist', 'copy-assets', 'copy-config', gulp.series('html', 'sass', 'sass-min', 'bootstrapjs', 'mrarejs'), gulp.series('serve', 'watch')));
 
-gulp.task('build', gulp.series('clean:dist', 'copy-assets', gulp.series('html', 'sass', 'sass-min', 'bootstrapjs', 'mrarejs')));
+gulp.task('build', gulp.series('clean:dist', 'copy-assets', 'copy-config', gulp.series('html', 'sass', 'sass-min', 'bootstrapjs', 'mrarejs')));
